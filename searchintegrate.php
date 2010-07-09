@@ -78,22 +78,24 @@ function searchintegrate_admin_panel(){
   <h2>Search Integrate Configuration</h2>
   <table border="0" cellspacing="5" cellpadding="5">
     <tr>
-      <td>integration id:</td>
+      <td>Integration ID:</td>
       <td><?php echo md5(get_option('home')); ?></td>
     </tr>
     <tr>
-      <td>wp home:</td>
+      <td>WP Home:</td>
       <td><?php form_option('home'); ?></td>
     </tr>
     <tr>
-      <td>integration status:</td>
+      <td>Integration Status:</td>
       <td id='integration_status'>
       </td>
     </tr>
     <tr>
       <td colspan='2'>
-      Search Integrate will use your <strong>integration id</strong> to identify your blog:
-      the value is calculated as md5 hash of your WP_HOME variable.
+      <br />
+      Search Integrate will use your <strong>integration id</strong> to identify your blog: you don't need to worry about anything.
+      <br />
+      Click HERE If your Integration Status is <strong>Not Active</strong>, otherwise you're good to go!
       </td>
     </tr>
   </table>
@@ -107,7 +109,7 @@ function searchintegrate_admin_panel(){
      if(typeof(wp_is_active) != 'undefined' && wp_is_active == true)
        integration_status.innerHTML = "<img src='../wp-content/plugins/searchintegrate/ok.gif'> Active";
      else
-       integration_status.innerHTML = "<img src='../wp-content/plugins/searchintegrate/no.gif'> Non Active";
+       integration_status.innerHTML = "<img src='../wp-content/plugins/searchintegrate/no.gif'> Not  Active";
    </script>
 </div>
 

@@ -53,7 +53,7 @@ function searchintegrate(){
   $search = get_query_var('s');
   if ($search){
     $wp = md5(get_option('home'));
-    echo "<script type=\"text/javascript\" charset=\"utf-8\" src=\"http://localhost:3030/search.js?q=$search&wp=$wp'))\"></script>";
+    echo "<script type=\"text/javascript\" charset=\"utf-8\" src=\"http://wp.searchintegrate.com/search.js?q=$search&wp=$wp'))\"></script>";
     echo "
       <script type=\"text/javascript\" charset=\"utf-8\">
         var content = document.getElementById('content');
@@ -102,7 +102,7 @@ function searchintegrate_admin_panel(){
   
   <? 
   $wp = md5(get_option('home'));
-  echo "<script type=\"text/javascript\" charset=\"utf-8\" src=\"http://localhost:3030/ping.js?wp=$wp\"></script>";
+  echo "<script type=\"text/javascript\" charset=\"utf-8\" src=\"http://wp.searchintegrate.com/ping.js?wp=$wp\"></script>";
   ?>
    <script type="text/javascript" charset="utf-8">
      var integration_status = document.getElementById('integration_status');

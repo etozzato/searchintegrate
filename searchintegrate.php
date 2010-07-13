@@ -8,45 +8,12 @@ Author: Tozzato-Johnson-Rabinowitz
 Author URI: http://searchintegrate.com/
 */
 
-define('SEARCHINTEGRATE_VERSION', '1.0.1');
-define('SI_SERVER', 'http://localhost:3030');
-//define('SI_SERVER', 'http://wp.searchintegrate.com');
+define('SEARCHINTEGRATE_VERSION', '2.0.1');
+//define('SI_SERVER', 'http://localhost:3030');
+define('SI_SERVER', 'http://wp.searchintegrate.com');
 
 function searchintegrate_css(){
-  echo "
-    <style type='text/css'>
-      #searchintegrate_subheader{
-        font-size: 11px;
-        font-weight:bold;
-        padding: 1px 1px 5px 0;
-        text-align:left;
-        border-bottom: 1px dotted #000;
-        margin-bottom: 10px;
-      }
-      #searchintegrate_result{
-        padding:0px 5px 5px 15px;
-        margin-bottom: 10px;  
-        clear: both;
-        border-bottom: 1px solid #ccc;
-      }
-      #searchintegrate_title{
-        font-size:13px;
-        color: #ff6600;
-        text-decoration:underline;
-      }
-      #searchintegrate_advertiser{
-        font-size:11px;
-        color:#330000;
-        padding: 0 10px 0 0;
-        text-decoration:none;
-      }
-      #searchintegrate_description{
-        font-size:small;
-        color: #000;
-        text-decoration:none;
-    }
-    </style>
-  ";
+  echo "<link type=\"text/css\" rel=\"stylesheet\" href=\"./wp-content/plugins/searchintegrate/searchintegrate.css\">";
 }
 
 add_action('wp_head', 'searchintegrate_css');
@@ -55,16 +22,13 @@ function searchintegrate(){
   $search = get_query_var('s');
   if ($search){
     $wp = md5(get_option('home'));
-    echo "<script type=\"text/javascript\" charset=\"utf-8\" src=\"".SI_SERVER."/search.js?q={$search}&wp={$wp}\"></script>";
+    echo "<script type=\"text/javascript\" charset=\"utf-8\" src=\"".SI_SERVER."/search.js?q={$search}\"></script>";
     echo "
       <script type=\"text/javascript\" charset=\"utf-8\">
         var content = document.getElementById('content');
         if (typeof(si_content)!='undefined'){
-          content.innerHTML += '<div id=\"searchintegrate\"><h4>&quot;{$search}&quot; results from searchintegrate.com</h4>' 
-          + si_content
-          + '</div>';
-        } else {
-          content.innerHTML += '<!-- Searchintegrate.com Error: the server did not provide a search result. Is your plug-in correctly configured? -->'
+          content.innerHTML += '<p class=\"si_header\"><em>{$search}</em> results from searchintegrate.com</p>' 
+          + si_content;
         }
       </script>
     ";
@@ -95,6 +59,21 @@ function searchintegrate_admin_panel(){
       </td>
     </tr>
     <tr>
+      <td>Top Queries:</td>
+      <td id='top_queries' style='width:80%'>
+      </td>
+    </tr>
+    <tr>
+      <td>Last Queries:</td>
+      <td id='last_queries'>
+      </td>
+    </tr>
+    <tr>
+      <td>Conversion Rate:</td>
+      <td id='conversion'>
+      </td>
+    </tr>
+    <tr>
       <td colspan='2'>
       <br />
       Search Integrate will use your <strong>integration id</strong> to identify your blog: you don't need to worry about anything.
@@ -114,12 +93,19 @@ function searchintegrate_admin_panel(){
   
   <? 
   $wp = md5(get_option('home'));
-  echo "<script type=\"text/javascript\" charset=\"utf-8\" src=\"".SI_SERVER."/ping.js?wp={$wp}\"></script>";
+  echo "<script type=\"text/javascript\" charset=\"utf-8\" src=\"".SI_SERVER."/ping.js\"></script>";
   ?>
    <script type="text/javascript" charset="utf-8">
      var integration_status = document.getElementById('integration_status');
-     if(typeof(wp_is_active) != 'undefined' && wp_is_active == true)
+     if(typeof(wp_is_active) != 'undefined' && wp_is_active == true){
        integration_status.innerHTML = "<img src='../wp-content/plugins/searchintegrate/ok.gif'> Active";
+       var top_queries = document.getElementById('top_queries');
+       top_queries.innerHTML = wp_top_queries;
+       var last_queries = document.getElementById('last_queries');
+       last_queries.innerHTML = wp_last_queries;
+       var conversion = document.getElementById('conversion');
+       conversion.innerHTML = wp_conversion;
+     }
      else
        integration_status.innerHTML = "<img src='../wp-content/plugins/searchintegrate/no.gif'> Not  Active";
    </script>

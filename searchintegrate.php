@@ -3,7 +3,7 @@
 Plugin Name: SearchIntegrate
 Plugin URI: http://searchintegrate.com/
 Description: The easy integration for your WP monetization. Be sure to <a href="options-general.php?page=searchintegrate.php">configure</a> your plug-in.
-Version: 1.0.1
+Version: 2.5.3
 Author: Tozzato-Johnson-Rabinowitz
 Author URI: http://searchintegrate.com/
 */

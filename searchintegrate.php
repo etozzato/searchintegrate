@@ -8,9 +8,12 @@ Author: Tozzato-Johnson-Rabinowitz
 Author URI: http://searchintegrate.com/
 */
 
-define('SEARCHINTEGRATE_VERSION', '2.0.1');
-//define('SI_SERVER', 'http://localhost:3030');
-define('SI_SERVER', 'http://wp.searchintegrate.com');
+define('SEARCHINTEGRATE_VERSION', '2.5.3');
+
+//define('WPSI', 'http://localhost:3030');
+//define('MYSI', 'http://localhost:3000');
+define('WPSI', 'http://wp.searchintegrate.com');
+define('MYSI', 'http://my.searchintegrate.com');
 
 function searchintegrate_css(){
   echo "<link type=\"text/css\" rel=\"stylesheet\" href=\"./wp-content/plugins/searchintegrate/searchintegrate.css\">";
@@ -22,7 +25,7 @@ function searchintegrate(){
   $search = get_query_var('s');
   if ($search){
     $wp = md5(get_option('home'));
-    echo "<script type=\"text/javascript\" charset=\"utf-8\" src=\"".SI_SERVER."/search.js?q={$search}\"></script>";
+    echo "<script type=\"text/javascript\" charset=\"utf-8\" src=\"".WPSI."/search.js?q={$search}\"></script>";
     echo "
       <script type=\"text/javascript\" charset=\"utf-8\">
         var content = document.getElementById('content');
@@ -93,7 +96,7 @@ function searchintegrate_admin_panel(){
   
   <? 
   $wp = md5(get_option('home'));
-  echo "<script type=\"text/javascript\" charset=\"utf-8\" src=\"".SI_SERVER."/ping.js\"></script>";
+  echo "<script type=\"text/javascript\" charset=\"utf-8\" src=\"".WPSI."/ping.js\"></script>";
   ?>
    <script type="text/javascript" charset="utf-8">
      var integration_status = document.getElementById('integration_status');
@@ -107,7 +110,7 @@ function searchintegrate_admin_panel(){
        conversion.innerHTML = wp_conversion;
      }
      else
-       integration_status.innerHTML = "<img src='../wp-content/plugins/searchintegrate/no.gif'> Not  Active";
+       integration_status.innerHTML = "<img src='../wp-content/plugins/searchintegrate/no.gif'> Not  Active <a href='<? echo MYSI ?>/dashboard/wp?integration_id=<?php echo md5(get_option('home')); ?>&wp_blogname=<?php echo get_option('blogname'); ?>&wp_home=<?php echo get_option('home'); ?>&wp_tagline=<? echo get_option('blogdescription'); ?>' target='_new'>Activate Now!</a>";
    </script>
 </div>
 

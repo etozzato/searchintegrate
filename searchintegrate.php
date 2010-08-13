@@ -3,12 +3,12 @@
 Plugin Name: SearchIntegrate
 Plugin URI: http://searchintegrate.com/
 Description: The easy integration for your WP monetization. Be sure to <a href="options-general.php?page=searchintegrate.php">configure</a> your plug-in.
-Version: 2.5.3
+Version: 2.6
 Author: Tozzato-Johnson-Rabinowitz
 Author URI: http://searchintegrate.com/
 */
 
-define('SEARCHINTEGRATE_VERSION', '2.5.3');
+define('SEARCHINTEGRATE_VERSION', '2.6');
 
 define('WPSI', 'http://localhost:3030');
 define('MYSI', 'http://localhost:3000');
@@ -62,6 +62,12 @@ function searchintegrate_admin_panel(){
       </td>
     </tr>
     <tr>
+      <td>Plugin Version:</td>
+      <td id='version'>
+      </td>
+    </tr>
+
+    <tr>
       <td>Top Queries:</td>
       <td id='top_queries' style='width:80%'>
       </td>
@@ -96,6 +102,7 @@ function searchintegrate_admin_panel(){
   
   <? 
   $wp = md5(get_option('home'));
+  echo "<script type=\"text/javascript\" charset=\"utf-8\">siwp_installed_version = '".SEARCHINTEGRATE_VERSION."';</script>";
   echo "<script type=\"text/javascript\" charset=\"utf-8\" src=\"".WPSI."/ping.js\"></script>";
   ?>
    <script type="text/javascript" charset="utf-8">
@@ -109,8 +116,15 @@ function searchintegrate_admin_panel(){
        var conversion = document.getElementById('conversion');
        conversion.innerHTML = wp_conversion;
      }
-     else
+     else{
        integration_status.innerHTML = "<img src='../wp-content/plugins/searchintegrate/no.gif'> Not  Active <a href='<? echo MYSI ?>/dashboard/wp?integration_id=<?php echo md5(get_option('home')); ?>&wp_blogname=<?php echo get_option('blogname'); ?>&wp_home=<?php echo get_option('home'); ?>&wp_tagline=<? echo get_option('blogdescription'); ?>' target='_new'>Activate Now!</a>";
+     }
+     var version = document.getElementById('version');
+     if (siwp_version == siwp_installed_version){
+       version.innerHTML = '<strong>up to date</strong>: v' + siwp_version + ' is installed.';
+     } else {
+       version.innerHTML = '<strong>update to v' + siwp_version + ' required </strong>: v' + siwp_installed_version + ' is installed.';
+     }
    </script>
 </div>
 

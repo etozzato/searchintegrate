@@ -1,33 +1,30 @@
-.si_header{
-  color:red;
+p.siwp_header{
+  color:orange;
 }
-.si_subheader{
-  font-size: 11px;
-  font-weight:bold;
-  padding: 1px 1px 5px 0;
-  text-align:left;
-  border-bottom: 1px dotted #000;
-  margin-bottom: 10px;
-}
-.si_result{
-  padding:0px 5px 5px 15px;
+
+div.siwp_result{
+  padding:0px;
   margin-bottom: 10px;  
   clear: both;
   border-bottom: 1px solid #ccc;
+  font-size:small;
 }
-.si_title{
-  font-size:13px;
+a.siwp_title{
   color: #ff6600;
-  text-decoration:underline;
 }
-.si_advertiser{
-  font-size:11px;
-  color:#330000;
-  padding: 0 10px 0 0;
+
+a.siwp_title:hover{
+  color: #cc0000;
+}
+
+a.siwp_description{
+  font-size:small;
+  color:#333;
   text-decoration:none;
 }
-.si_description{
+
+a.siwp_url{
   font-size:small;
-  color: #000;
+  color:#333;
   text-decoration:none;
 }

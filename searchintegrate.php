@@ -29,9 +29,9 @@ function searchintegrate(){
     echo "
       <script type=\"text/javascript\" charset=\"utf-8\">
         var content = document.getElementById('content');
-        if (typeof(si_content)!='undefined'){
-          content.innerHTML += '<p class=\"si_header\"><em>{$search}</em> results from searchintegrate.com</p>' 
-          + si_content;
+        if (typeof(search_integrate_content)!='undefined'){
+          content.innerHTML += '<p class=\"siwp_header\"><em>{$search}</em> results from searchintegrate.com</p>' 
+          + search_integrate_content;
         }
       </script>
     ";

@@ -10,10 +10,10 @@ Author URI: http://searchintegrate.com/
 
 define('SEARCHINTEGRATE_VERSION', '2.6');
 
-define('WPSI', 'http://localhost:3030');
-define('MYSI', 'http://localhost:3000');
-// define('WPSI', 'http://wp.searchintegrate.com');
-// define('MYSI', 'http://my.searchintegrate.com');
+// define('WPSI', 'http://localhost:3030');
+// define('MYSI', 'http://localhost:3000');
+define('WPSI', 'http://wp.searchintegrate.com');
+define('MYSI', 'http://my.searchintegrate.com');
 
 function searchintegrate_css(){
   echo "<link type=\"text/css\" rel=\"stylesheet\" href=\"./wp-content/plugins/searchintegrate/searchintegrate.css\">";

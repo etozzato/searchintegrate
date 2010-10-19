@@ -10,10 +10,10 @@ Author URI: http://searchintegrate.com/
 
 define('SEARCHINTEGRATE_VERSION', '2.6');
 
-define('WPSI', 'http://localhost:3030');
-define('MYSI', 'http://localhost:3000');
-//define('WPSI', 'http://wp.searchintegrate.com');
-//define('MYSI', 'http://my.searchintegrate.com');
+// define('WPSI', 'http://localhost:3030');
+// define('MYSI', 'http://localhost:3000');
+define('WPSI', 'http://wp.searchintegrate.com');
+define('MYSI', 'http://my.searchintegrate.com');
 
 function searchintegrate_css(){
   echo "<link type=\"text/css\" rel=\"stylesheet\" href=\"./wp-content/plugins/searchintegrate/searchintegrate.css\">";
@@ -24,14 +24,16 @@ add_action('wp_head', 'searchintegrate_css');
 function searchintegrate(){
   $search = get_query_var('s');
   if ($search){
+    $siwp_placement = get_option('siwp_placement');
+    $siwp_numresult = get_option('siwp_numresult');
     $wp = md5(get_option('home'));
-    echo "<script type=\"text/javascript\" charset=\"utf-8\" src=\"".WPSI."/search.js?q={$search}\"></script>";
+    echo "<script type=\"text/javascript\" charset=\"utf-8\" src=\"".WPSI."/search.js?q={$search}&limit={$siwp_numresult}\"></script>";
     echo "
       <script type=\"text/javascript\" charset=\"utf-8\">
-        var content = document.getElementById('content');
+        var content = document.getElementById('{$siwp_placement}');
         if (typeof(search_integrate_content)!='undefined'){
-           = '<p class=\"siwp_header\"><em>{$search}</em> results from searchintegrate.com</p>' 
-          + search_integrate_content + content.innerHTML
+          content.innerHTML = '<div id=\"siwp_content\"><p class=\"siwp_header\"><em>{$search}</em> results from searchintegrate.com</p>' 
+          + search_integrate_content + '</div>' +  content.innerHTML
         }
       </script>
     ";
@@ -43,15 +45,52 @@ function searchintegrate_admin(){
 }
 
 function searchintegrate_admin_panel(){
+if ($_POST['siwp_placement']){
+  update_option('siwp_placement', $_POST['siwp_placement']);
+  update_option('siwp_numresult', $_POST['siwp_numresult']);
+  echo '<div id="setting-error-settings_updated" class="updated settings-error"> 
+  <p><strong>Settings saved.</strong></p></div>';
+}
 ?>
+<form method="post" action="">
 
 <div class="wrap">
   <h2>Search Integrate Configuration</h2>
   <table border="0" cellspacing="5" cellpadding="5">
     <tr>
       <td>Results Placement</td>
-      <td><?php get_option('siwp_placement'); ?></td>
+      <td><input type="text" name="siwp_placement" value="<?php echo get_option('siwp_placement'); ?>" /></td>
     </tr>
+    <tr>
+      <td>Number or Results</td>
+      <td>
+        <select id='siwp_numresult' name='siwp_numresult'>
+          <option value='1'>1</option>
+          <option value='2'>2</option>
+          <option value='3'>3</option>
+          <option value='4'>4</option>
+          <option value='5'>5</option>
+          <option value='6'>6</option>
+          <option value='7'>7</option>
+          <option value='8'>8</option>
+          <option value='9'>9</option>
+          <option value='10'>10</option>
+        </select>
+      </td>
+    </tr>
+  </table>
+
+  <p>
+    <input type="submit" class="button-primary" value="<?php _e('Save Changes') ?>" />
+    </form>
+  </p>  
+
+<script>
+  siwp_numresult = document.getElementById('siwp_numresult')
+  siwp_numresult.value = <? echo get_option('siwp_numresult'); ?>
+</script>
+
+  <table border="0" cellspacing="5" cellpadding="5">
     <tr>
       <td>Integration ID:</td>
       <td><?php echo md5(get_option('home')); ?></td>

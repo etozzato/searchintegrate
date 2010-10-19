@@ -51,6 +51,8 @@ if ($_POST['siwp_placement']){
   echo '<div id="setting-error-settings_updated" class="updated settings-error"> 
   <p><strong>Settings saved.</strong></p></div>';
 }
+if (!get_option('siwp_placement')){ add_option('siwp_placement', 'content'); }
+if (!get_option('siwp_numresult')){ add_option('siwp_numresult', 5); }
 ?>
 <form method="post" action="">
 

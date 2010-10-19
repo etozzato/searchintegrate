@@ -10,10 +10,10 @@ Author URI: http://searchintegrate.com/
 
 define('SEARCHINTEGRATE_VERSION', '2.6');
 
-// define('WPSI', 'http://localhost:3030');
-// define('MYSI', 'http://localhost:3000');
-define('WPSI', 'http://wp.searchintegrate.com');
-define('MYSI', 'http://my.searchintegrate.com');
+define('WPSI', 'http://localhost:3030');
+define('MYSI', 'http://localhost:3000');
+//define('WPSI', 'http://wp.searchintegrate.com');
+//define('MYSI', 'http://my.searchintegrate.com');
 
 function searchintegrate_css(){
   echo "<link type=\"text/css\" rel=\"stylesheet\" href=\"./wp-content/plugins/searchintegrate/searchintegrate.css\">";
@@ -30,8 +30,8 @@ function searchintegrate(){
       <script type=\"text/javascript\" charset=\"utf-8\">
         var content = document.getElementById('content');
         if (typeof(search_integrate_content)!='undefined'){
-          content.innerHTML += '<p class=\"siwp_header\"><em>{$search}</em> results from searchintegrate.com</p>' 
-          + search_integrate_content;
+           = '<p class=\"siwp_header\"><em>{$search}</em> results from searchintegrate.com</p>' 
+          + search_integrate_content + content.innerHTML
         }
       </script>
     ";
@@ -48,6 +48,10 @@ function searchintegrate_admin_panel(){
 <div class="wrap">
   <h2>Search Integrate Configuration</h2>
   <table border="0" cellspacing="5" cellpadding="5">
+    <tr>
+      <td>Results Placement</td>
+      <td><?php get_option('siwp_placement'); ?></td>
+    </tr>
     <tr>
       <td>Integration ID:</td>
       <td><?php echo md5(get_option('home')); ?></td>

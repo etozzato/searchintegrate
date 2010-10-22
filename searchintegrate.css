@@ -1,35 +1,53 @@
 #siwp_content{
-  width:640px;
   margin-bottom:5px;
 }
 
-p.siwp_header{
-  color:orange;
+#siwp_header{
+  color:#333;
+  font-weight:bold;
+  padding: 0 0 15px 0;
+  border-bottom: 1px dotted #333;
+  height:20px;
 }
 
-div.siwp_result{
-  padding:0px;
-  margin-bottom: 10px;  
+#siwp_header #results{
+	float:left;	
+}
+
+#siwp_header #powered{
+	float: right;
+}
+
+.siwp_result{
+  padding:10px 0;
   clear: both;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px dotted #333;
   font-size:small;
 }
+
 a.siwp_title{
-  color: #ff6600;
+	font-size: medium;
+	text-decoration: none;
 }
 
 a.siwp_title:hover{
-  color: #cc0000;
+	text-decoration: underline;
+
 }
 
 a.siwp_description{
   font-size:small;
-  color:#333;
+  color:#222;
   text-decoration:none;
 }
 
 a.siwp_url{
   font-size:small;
-  color:#333;
   text-decoration:none;
+}
+
+
+#siwp-config{
+	border: 1px dotted #000;
+	background: #ffffeb;	
 }

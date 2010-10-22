@@ -32,7 +32,7 @@ function searchintegrate(){
       <script type=\"text/javascript\" charset=\"utf-8\">
         var content = document.getElementById('{$siwp_placement}');
         if (typeof(search_integrate_content)!='undefined'){
-          content.innerHTML = '<div id=\"siwp_content\"><p class=\"siwp_header\"><em>{$search}</em> results from searchintegrate.com</p>' 
+          content.innerHTML = '<div id=\"siwp_content\"><div id=\"siwp_header\"><span id=\"results\">Sponsored search results for: <strong>{$search}</strong></span><span id=\"powered\"><a href=\"http://www.searchintegrate.com\"><img src=\"wp-content/plugins/searchintegrate/search_integrate_logo.png\" alt=\"Search Integrate\" title=\"Search Integrate\"></a></span></div>' 
           + search_integrate_content + '</div>' +  content.innerHTML
         }
       </script>
@@ -57,15 +57,17 @@ if (!get_option('siwp_numresult')){ add_option('siwp_numresult', 5); }
 <form method="post" action="">
 
 <div class="wrap">
+
+<div style="border: 1px dotted #000; background: #ffffeb; padding: 10px 30px; margin: 20px 0;">
   <h2>Search Integrate Configuration</h2>
-  <table border="0" cellspacing="5" cellpadding="5">
-    <tr>
-      <td>Results Placement</td>
-      <td><input type="text" name="siwp_placement" value="<?php echo get_option('siwp_placement'); ?>" /></td>
-    </tr>
-    <tr>
-      <td>Number or Results</td>
-      <td>
+	<br />
+    	<strong>Name of CSS element where your search results are displayed</strong><br />
+        <input type="text" name="siwp_placement" value="<?php echo get_option('siwp_placement'); ?>" /> -- This is usually "content" - no need to change for most themes
+		
+        
+        <br /><br />
+        
+        <strong>Number of sponsored results to display</strong><br />
         <select id='siwp_numresult' name='siwp_numresult'>
           <option value='1'>1</option>
           <option value='2'>2</option>
@@ -77,16 +79,13 @@ if (!get_option('siwp_numresult')){ add_option('siwp_numresult', 5); }
           <option value='8'>8</option>
           <option value='9'>9</option>
           <option value='10'>10</option>
-        </select>
-      </td>
-    </tr>
-  </table>
+        </select> -- Recommend: 3 results
 
   <p>
     <input type="submit" class="button-primary" value="<?php _e('Save Changes') ?>" />
     </form>
   </p>  
-
+</div>
 <script>
   siwp_numresult = document.getElementById('siwp_numresult')
   siwp_numresult.value = <? echo get_option('siwp_numresult'); ?>
@@ -95,17 +94,13 @@ if (!get_option('siwp_numresult')){ add_option('siwp_numresult', 5); }
   <table border="0" cellspacing="5" cellpadding="5">
     <tr>
       <td>Integration ID:</td>
-      <td><?php echo md5(get_option('home')); ?></td>
+      <td><?php echo md5(get_option('home')); ?> (your unique SIWP id code)</td>
     </tr>
     <tr>
-      <td>WP Home:</td>
+      <td>Where this blog is installed:</td>
       <td><?php form_option('home'); ?></td>
     </tr>
-    <tr>
-      <td>Integration Status:</td>
-      <td id='integration_status'>
-      </td>
-    </tr>
+
     <tr>
       <td>Plugin Version:</td>
       <td id='version'>
@@ -127,20 +122,18 @@ if (!get_option('siwp_numresult')){ add_option('siwp_numresult', 5); }
       <td id='conversion'>
       </td>
     </tr>
+    <tr><td colspan='2' style="border-bottom: 1px dotted #000;"></td></tr>
     <tr>
-      <td colspan='2'>
-      <br />
-      Search Integrate will use your <strong>integration id</strong> to identify your blog: you don't need to worry about anything.
-      <br />
-      Click HERE If your Integration Status is <strong>Not Active</strong>, otherwise you're good to go!
+      <td valign="top"><strong>Account Status:</strong></td>
+      <td id='integration_status'>
       </td>
     </tr>
+    <tr><td colspan='2' style="border-bottom: 1px dotted #000;"></td></tr>
     <tr>
       <td colspan='2'>
       <br />
-      Our plug-in will display relevant ads appending results to the standard <em>content</em> tag: this should assure complete compatibility
-      with any WP template. Please not that our search engine will expect to receive requests for this blog from this page: 
-      <strong><?php form_option('home'); ?></strong> otherwise, for the security of your account, it will not respond.
+      The Search Integrate WordPress plugin (SIWP) displays relevant sponsored ads along side the default WordPress results. By default, these results are displayed in the <em>content</em> tag.
+      <p>Please note that for the security of your account, our search engine will only respond to requests for this blog from this location: <strong><?php form_option('home'); ?></strong>.</p>
       </td>
     </tr>
   </table>
@@ -162,7 +155,7 @@ if (!get_option('siwp_numresult')){ add_option('siwp_numresult', 5); }
        conversion.innerHTML = wp_conversion;
      }
      else{
-       integration_status.innerHTML = "<img src='../wp-content/plugins/searchintegrate/no.gif'> Not  Active <a href='<? echo MYSI ?>/dashboard/wp?integration_id=<?php echo md5(get_option('home')); ?>&wp_blogname=<?php echo get_option('blogname'); ?>&wp_home=<?php echo get_option('home'); ?>&wp_tagline=<? echo get_option('blogdescription'); ?>' target='_new'>Activate Now!</a>";
+       integration_status.innerHTML = "<img src='../wp-content/plugins/searchintegrate/no.gif'> Not  Active <a href='<? echo MYSI ?>/dashboard/wp?integration_id=<?php echo md5(get_option('home')); ?>&wp_blogname=<?php echo get_option('blogname'); ?>&wp_home=<?php echo get_option('home'); ?>&wp_tagline=<? echo get_option('blogdescription'); ?>' target='_new'>Activate Now!</a> -- Account activation is required for publisher payment!";
      }
      var version = document.getElementById('version');
      if (siwp_version == siwp_installed_version){

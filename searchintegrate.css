@@ -11,11 +11,11 @@
 }
 
 #siwp_header #results{
-	float:left;	
+  float:left;  
 }
 
 #siwp_header #powered{
-	float: right;
+  float: right;
 }
 
 .siwp_result{
@@ -26,12 +26,12 @@
 }
 
 a.siwp_title{
-	font-size: medium;
-	text-decoration: none;
+  font-size: medium;
+  text-decoration: none;
 }
 
 a.siwp_title:hover{
-	text-decoration: underline;
+  text-decoration: underline;
 
 }
 
@@ -48,6 +48,10 @@ a.siwp_url{
 
 
 #siwp-config{
-	border: 1px dotted #000;
-	background: #ffffeb;	
+  border: 1px dotted #000;
+  background: #ffffeb;  
+}
+
+#powered {
+  float:right;
 }

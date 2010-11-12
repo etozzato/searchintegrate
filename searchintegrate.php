@@ -10,10 +10,10 @@ Author URI: http://searchintegrate.com/
 
 define('SEARCHINTEGRATE_VERSION', '2.6');
 
-// define('WPSI', 'http://localhost:3030');
-// define('MYSI', 'http://localhost:3000');
-define('WPSI', 'http://wp.searchintegrate.com');
-define('MYSI', 'http://my.searchintegrate.com');
+define('WPSI', 'http://localhost:3030');
+define('MYSI', 'http://localhost:3000');
+// define('WPSI', 'http://wp.searchintegrate.com');
+// define('MYSI', 'http://my.searchintegrate.com');
 
 // ADMIN START //
 
@@ -132,9 +132,9 @@ $plugin_dir = get_settings('home').'/wp-content/plugins/'.dirname(plugin_basenam
           else{
             jQuery('#integration_status').html('<img src=\"{$plugin_dir}/no.gif\"> Not Active {$activation_link}');}
           if (siwp_version == siwp_installed_version){
-            jQuery('#version').html('current: v' + siwp_version + ' is installed.');}
+            jQuery('#version').html('<img src=\"{$plugin_dir}/ok.gif\"> V' + siwp_version);}
           else {
-            jQuery('#version').html('update to v' + siwp_version + ' required: v' + siwp_installed_version + ' is installed.');}
+            jQuery('#version').html('<img src=\"{$plugin_dir}/no.gif\"> please update to V' + siwp_version);}
         </script>";
 }
 

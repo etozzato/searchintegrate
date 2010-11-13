@@ -10,10 +10,13 @@ Author URI: http://searchintegrate.com/
 
 define('SEARCHINTEGRATE_VERSION', '2.6');
 
-// define('WPSI', 'http://localhost:3030');
-// define('MYSI', 'http://localhost:3000');
-define('WPSI', 'http://wp.searchintegrate.com');
-define('MYSI', 'http://my.searchintegrate.com');
+if (strrpos(get_option('home'), 'localhost'){
+  define('WPSI', 'http://localhost:3030');
+  define('MYSI', 'http://localhost:3000');
+} else {
+  define('WPSI', 'http://wp.searchintegrate.com');
+  define('MYSI', 'http://my.searchintegrate.com');
+}
 
 // ADMIN START //
 

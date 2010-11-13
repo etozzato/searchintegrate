@@ -14,11 +14,7 @@
   float:left;  
 }
 
-#siwp_header{
-  float:right;
-}
-
-#powered {
+#siwp_header #powered{
   float:right;
 }
 

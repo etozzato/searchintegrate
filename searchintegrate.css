@@ -14,8 +14,12 @@
   float:left;  
 }
 
-#siwp_header #powered{
-  float: right;
+#siwp_header{
+  float:right;
+}
+
+#powered {
+  float:right;
 }
 
 .siwp_result{

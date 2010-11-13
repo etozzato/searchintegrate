@@ -10,7 +10,7 @@ Author URI: http://searchintegrate.com/
 
 define('SEARCHINTEGRATE_VERSION', '2.6');
 
-if (strrpos(get_option('home'), 'localhost'){
+if (strrpos(get_option('home'), 'localhost')){
   define('WPSI', 'http://localhost:3030');
   define('MYSI', 'http://localhost:3000');
 } else {
@@ -102,12 +102,7 @@ $plugin_dir = get_settings('home').'/wp-content/plugins/'.dirname(plugin_basenam
       <td colspan='2' style="border-bottom: 1px dotted #000;"></td></tr>
     <tr>
       <td colspan='2'>
-        <br />
-        The Search Integrate WordPress plugin (SIWP) displays relevant sponsored ads along side the default WordPress results.
-        By default, these results are displayed in the <em>content</em> tag.
-        <br />
-        Please note that for the security of your account, our search engine will only respond to requests for this blog
-        from this location: <strong><?php form_option('home'); ?></strong>.
+        <img src="<?php echo $plugin_dir; ?>/search_integrate_logo.png">
       </td>
     </tr>
   </table>

@@ -78,17 +78,17 @@ $plugin_dir = get_settings('home').'/wp-content/plugins/'.dirname(plugin_basenam
       </td>
     </tr>
     <tr class='optional' style='display:none'>
-      <td>Top Queries:</td>
+      <td>Top Searches:</td>
       <td id='top_queries' style='width:80%'>
       </td>
     </tr>
     <tr class='optional' style='display:none'>
-      <td>Last Queries:</td>
+      <td>Last Searches:</td>
       <td id='last_queries'>
       </td>
     </tr>
     <tr class='optional' style='display:none'>
-      <td>Conversion Rate:</td>
+      <td><a href='http://en.wikipedia.org/wiki/Clickthrough_rate' target='_new'>Clickthrough Rate</a>:</td>
       <td id='conversion'>
       </td>
     </tr>
@@ -102,7 +102,7 @@ $plugin_dir = get_settings('home').'/wp-content/plugins/'.dirname(plugin_basenam
       <td colspan='2' style="border-bottom: 1px dotted #000;"></td></tr>
     <tr>
       <td colspan='2'>
-        <img src="<?php echo $plugin_dir; ?>/search_integrate_logo.png">
+        <a href="<?php echo MYSI  ?>"><img src="<?php echo $plugin_dir; ?>/search_integrate_logo.png"></a>
       </td>
     </tr>
   </table>
@@ -115,24 +115,50 @@ $plugin_dir = get_settings('home').'/wp-content/plugins/'.dirname(plugin_basenam
                       .get_option('home')."&wp_tagline="
                       .get_option('blogdescription')
                       ."\" target=\"_new\">Activate Now!</a> -- Account activation is required for publisher payment!";
+  
+  $signup = file_get_contents(dirname(__FILE__)."/signup.html");
+  
   echo "<script type=\"text/javascript\" src=\"".WPSI."/ping.js\"></script>";
+  
   echo "<script type=\"text/javascript\">
           var siwp_installed_version = '".SEARCHINTEGRATE_VERSION."';
           document.getElementById('siwp_numresult').value = {$siwp_numresult}
         </script>";
+  
   echo "<script type=\"text/javascript\">
-          if(typeof(wp_is_active) != 'undefined' && wp_is_active == true){
-            jQuery('#integration_status').html('<img src=\"{$plugin_dir}/ok.gif\"> Active');
+
+          if(typeof(wp_is_active) != 'undefined'){
+            
             jQuery('#top_queries').html(wp_top_queries);
             jQuery('#last_queries').html(wp_last_queries);
             jQuery('#conversion').html(wp_conversion);
-            jQuery('.optional').fadeIn();} 
-          else{
-            jQuery('#integration_status').html('<img src=\"{$plugin_dir}/no.gif\"> Not Active {$activation_link}');}
-          if (siwp_version == siwp_installed_version){
-            jQuery('#version').html('<img src=\"{$plugin_dir}/ok.gif\"> V' + siwp_version);}
-          else {
-            jQuery('#version').html('<img src=\"{$plugin_dir}/no.gif\"> please update to V' + siwp_version);}
+            jQuery('.optional').fadeIn();
+
+            if (siwp_version == siwp_installed_version){
+              jQuery('#version').html('<img src=\"{$plugin_dir}/ok.gif\"> V' + siwp_version);
+            } else {
+              jQuery('#version').html('<img src=\"{$plugin_dir}/no.gif\"> please update to V' + siwp_version);
+            }
+            
+            if(wp_is_active == true){
+
+              jQuery('#integration_status').html('<img src=\"{$plugin_dir}/ok.gif\"> Active');
+
+            } else {
+
+              jQuery('#integration_status').html('{$signup}');
+              jQuery('#integration_status').prepend('<img src=\"{$plugin_dir}/no.gif\"> Not Created');
+              jQuery('#account_form').attr('action', '".MYSI."/wp_account');
+              jQuery('#siwp_email').attr('value', '".get_option('admin_email')."');
+              jQuery('#siwp_title').attr('value', '".get_option('blogname')."');
+              jQuery('#siwp_home').attr('value', '".get_option('home')."');
+              jQuery('#siwp_id').attr('value', '".md5(get_option('home'))."');
+              jQuery('#account_form_container').fadeIn();
+              
+            }
+          
+          }
+
         </script>";
 }
 

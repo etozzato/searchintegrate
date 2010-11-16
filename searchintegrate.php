@@ -10,7 +10,7 @@ Author URI: http://searchintegrate.com/
 
 define('SEARCHINTEGRATE_VERSION', '2.6');
 
-if (strrpos(get_option('home'), 'localhost')){
+if (strrpos(bloginfo('wpurl'), 'localhost')){
   define('WPSI', 'http://localhost:3030');
   define('MYSI', 'http://localhost:3000');
 } else {
@@ -27,14 +27,16 @@ function searchintegrate_admin(){
 }
 
 function searchintegrate_admin_panel(){
+	
 if ($_POST['siwp_placement']){
   update_option('siwp_config', "{$_POST['siwp_placement']}|{$_POST['siwp_numresult']}");
   echo '<div class="updated settings-error"><p><strong>Settings saved.</strong></p></div>';
 }
 if (!get_option('siwp_config')){ add_option('siwp_config', 'content|5'); }
 list($siwp_placement, $siwp_numresult) = explode("|", get_option('siwp_config'));
-$plugin_dir = get_settings('home').'/wp-content/plugins/'.dirname(plugin_basename(__FILE__));
+$plugin_dir = bloginfo('wpurl').'/wp-content/plugins/'.dirname(plugin_basename(__FILE__));
 ?>
+ EEE <? echo wpurl; ?>
 <div class="wrap">
   <div style="border: 1px dotted #000; background: #ffffeb; padding: 20px; margin: 20px;">
     <form method="post" action="">
@@ -65,7 +67,7 @@ $plugin_dir = get_settings('home').'/wp-content/plugins/'.dirname(plugin_basenam
   <table border="0" cellspacing="5" cellpadding="5">
     <tr>
       <td>Integration ID:</td>
-      <td><?php echo md5(get_option('home')); ?> (your unique SIWP id code)</td>
+      <td><?php echo md5(bloginfo('wpurl')); ?> (your unique SIWP id code)</td>
     </tr>
     <tr>
       <td>Where this blog is installed:</td>
@@ -110,9 +112,9 @@ $plugin_dir = get_settings('home').'/wp-content/plugins/'.dirname(plugin_basenam
 
   <?
   $activation_link = "<a href=\"".MYSI."/dashboard/wp?integration_id="
-                      .md5(get_option('home'))."&wp_blogname="
+                      .md5(bloginfo('wpurl'))."&wp_blogname="
                       .get_option('blogname')."&wp_home="
-                      .get_option('home')."&wp_tagline="
+                      .bloginfo('wpurl')."&wp_tagline="
                       .get_option('blogdescription')
                       ."\" target=\"_new\">Activate Now!</a> -- Account activation is required for publisher payment!";
   
@@ -151,8 +153,8 @@ $plugin_dir = get_settings('home').'/wp-content/plugins/'.dirname(plugin_basenam
               jQuery('#account_form').attr('action', '".MYSI."/wp_account');
               jQuery('#siwp_email').attr('value', '".get_option('admin_email')."');
               jQuery('#siwp_title').attr('value', '".get_option('blogname')."');
-              jQuery('#siwp_home').attr('value', '".get_option('home')."');
-              jQuery('#siwp_id').attr('value', '".md5(get_option('home'))."');
+              jQuery('#siwp_home').attr('value', '".bloginfo('wpurl')."');
+              jQuery('#siwp_id').attr('value', '".md5(bloginfo('wpurl'))."');
               jQuery('#account_form_container').fadeIn();
               
             }
@@ -168,12 +170,12 @@ add_action('wp_head', 'searchintegrate_css');
 add_action('wp_footer', 'searchintegrate');
 
 function searchintegrate_css(){
-  $plugin_dir = get_settings('home').'/wp-content/plugins/'.dirname(plugin_basename(__FILE__));
+  $plugin_dir = bloginfo('wpurl').'/wp-content/plugins/'.dirname(plugin_basename(__FILE__));
   echo "<link type=\"text/css\" rel=\"stylesheet\" href=\"{$plugin_dir}/searchintegrate.css\">";
 }
 
 function searchintegrate(){
-  $plugin_dir = get_settings('home').'/wp-content/plugins/'.dirname(plugin_basename(__FILE__));
+  $plugin_dir = bloginfo('wpurl').'/wp-content/plugins/'.dirname(plugin_basename(__FILE__));
   $search = get_query_var('s');
   if ($search){
     list($siwp_placement, $siwp_numresult) = explode("|", get_option('siwp_config'));

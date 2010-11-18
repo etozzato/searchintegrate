@@ -27,7 +27,7 @@ function searchintegrate_admin(){
 }
 
 function searchintegrate_admin_panel(){
-	
+  
 if ($_POST['siwp_placement']){
   update_option('siwp_config', "{$_POST['siwp_placement']}|{$_POST['siwp_numresult']}");
   echo '<div class="updated settings-error"><p><strong>Settings saved.</strong></p></div>';
@@ -35,9 +35,6 @@ if ($_POST['siwp_placement']){
 if (!get_option('siwp_config')){ add_option('siwp_config', 'content|5'); }
 list($siwp_placement, $siwp_numresult) = explode("|", get_option('siwp_config'));
 $plugin_dir = get_bloginfo('wpurl').'/wp-content/plugins/'.dirname(plugin_basename(__FILE__));
-// echo $plugin_dir;
-// echo "<br>";
-// echo get_bloginfo('template_directory');
 ?>
 
 <div class="wrap">
@@ -114,15 +111,8 @@ $plugin_dir = get_bloginfo('wpurl').'/wp-content/plugins/'.dirname(plugin_basena
 </div>
 
   <?
-  $activation_link = "<a href=\"".MYSI."/dashboard/wp?integration_id="
-                      .md5(get_bloginfo('wpurl'))."&wp_blogname="
-                      .get_option('blogname')."&wp_home="
-                      .get_bloginfo('wpurl')."&wp_tagline="
-                      .get_option('blogdescription')
-                      ."\" target=\"_new\">Activate Now!</a> -- Account activation is required for publisher payment!";
-  
   $signup = file_get_contents(dirname(__FILE__)."/signup.html");
-  
+
   echo "<script type=\"text/javascript\" src=\"".WPSI."/ping.js\"></script>";
   
   echo "<script type=\"text/javascript\">
@@ -162,7 +152,9 @@ $plugin_dir = get_bloginfo('wpurl').'/wp-content/plugins/'.dirname(plugin_basena
               
             }
           
-          }
+          } else {
+      jQuery('#integration_status').html('oops! we're sorry, our server is currently under manteinence')
+    }
 
         </script>";
 }

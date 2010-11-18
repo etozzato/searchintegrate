@@ -29,11 +29,11 @@ function searchintegrate_admin(){
 function searchintegrate_admin_panel(){
   
 if ($_POST['siwp_placement']){
-  update_option('siwp_config', "{$_POST['siwp_placement']}|{$_POST['siwp_numresult']}");
+  update_option('siwp_config', "{$_POST['siwp_placement']}|{$_POST['siwp_numresult']}|{$_POST['siwp_branding']}");
   echo '<div class="updated settings-error"><p><strong>Settings saved.</strong></p></div>';
 }
-if (!get_option('siwp_config')){ add_option('siwp_config', 'content|5'); }
-list($siwp_placement, $siwp_numresult) = explode("|", get_option('siwp_config'));
+if (!get_option('siwp_config')){ add_option('siwp_config', 'content|5|1'); }
+list($siwp_placement, $siwp_numresult, $siwp_branding) = explode("|", get_option('siwp_config'));
 $plugin_dir = get_bloginfo('wpurl').'/wp-content/plugins/'.dirname(plugin_basename(__FILE__));
 ?>
 
@@ -42,9 +42,13 @@ $plugin_dir = get_bloginfo('wpurl').'/wp-content/plugins/'.dirname(plugin_basena
     <form method="post" action="">
     <h2>Search Integrate Configuration</h2>
     <br />
+    <strong>Display Search Integrate logo</strong>
+    <input type="checkbox" name="siwp_branding" value="1" <?php if ($siwp_branding) echo 'checked'; ?>> 
+    -- Our logo will show up along with the search results;
+    <br /><br />
     <strong>Name of CSS element where your search results are displayed</strong><br />
     <input type="text" name="siwp_placement" value="<?php echo $siwp_placement; ?>" />
-    -- This is usually "content" - no need to change for most themes
+    -- This is usually "content" - no need to change for most themes;
     <br /><br />
     <strong>Number of sponsored results to display</strong><br />
     <select id='siwp_numresult' name='siwp_numresult'>
@@ -58,7 +62,7 @@ $plugin_dir = get_bloginfo('wpurl').'/wp-content/plugins/'.dirname(plugin_basena
       <option value='8'>8</option>
       <option value='9'>9</option>
       <option value='10'>10</option>
-    </select> -- Recommend: 3 results
+    </select> -- Recommend: 3 results;
     <br /><br />
     <input type="submit" class="button-primary" value="<?php _e('Save Changes') ?>" />
   </form>
@@ -151,11 +155,9 @@ $plugin_dir = get_bloginfo('wpurl').'/wp-content/plugins/'.dirname(plugin_basena
               jQuery('#account_form_container').fadeIn();
               
             }
-          
           } else {
-      jQuery('#integration_status').html('oops! we're sorry, our server is currently under manteinence')
-    }
-
+            jQuery('#integration_status').html('Oops! Search Integrate is over-capacity. Thanks for noticing - we\'ll have everything back to normal soon.')
+          }
         </script>";
 }
 
@@ -173,7 +175,7 @@ function searchintegrate(){
   $plugin_dir = get_bloginfo('wpurl').'/wp-content/plugins/'.dirname(plugin_basename(__FILE__));
   $search = get_query_var('s');
   if ($search){
-    list($siwp_placement, $siwp_numresult) = explode("|", get_option('siwp_config'));
+    list($siwp_placement, $siwp_numresult, $siwp_branding) = explode("|", get_option('siwp_config'));
     echo "<script type=\"text/javascript\" src=\"".WPSI."/search.js?q={$search}&limit={$siwp_numresult}\"></script>";
     echo "<script type=\"text/javascript\">
           if (typeof(search_integrate_content) != 'undefined'){
@@ -181,5 +183,7 @@ function searchintegrate(){
           content.innerHTML = search_integrate_content + content.innerHTML;}
           </script>";
   }
+  if ($siwp_branding!=1)
+    echo "<script type=\"text/javascript\">document.getElementById('powered').style.display='none';</script>";
 }
 ?>

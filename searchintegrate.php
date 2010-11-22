@@ -142,7 +142,13 @@ $plugin_dir = get_bloginfo('wpurl').'/wp-content/plugins/'.dirname(plugin_basena
             if(wp_is_active == true){
 
               jQuery('#integration_status').html('<img src=\"{$plugin_dir}/ok.gif\"> Active');
-
+              
+              if(wp_is_payable == true){
+                jQuery('#integration_status').append('&nbsp;<img src=\"{$plugin_dir}/ok.gif\"> Payable');
+              } else {
+                jQuery('#integration_status').append('&nbsp;<img src=\"{$plugin_dir}/no.gif\"> Not Payable (EXPLAIN)');
+              }
+              
             } else {
 
               jQuery('#integration_status').html('{$signup}');

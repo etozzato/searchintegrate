@@ -71,11 +71,11 @@ $plugin_dir = get_bloginfo('wpurl').'/wp-content/plugins/'.dirname(plugin_basena
   <table border="0" cellspacing="5" cellpadding="5">
     <tr>
       <td>Integration ID:</td>
-      <td><?php echo md5(get_bloginfo('wpurl')); ?> (your unique SIWP id code)</td>
+      <td><?php echo md5(preg_replace('/www\./', '', get_bloginfo('wpurl'))); ?> (your unique SIWP id code)</td>
     </tr>
     <tr>
       <td>Where this blog is installed:</td>
-      <td><?php form_option('home'); ?></td>
+      <td><?php echo get_bloginfo('wpurl'); ?></td>
     </tr>
     <tr>
       <td>Plugin Version:</td>
@@ -146,7 +146,7 @@ $plugin_dir = get_bloginfo('wpurl').'/wp-content/plugins/'.dirname(plugin_basena
               if(wp_is_payable == true){
                 jQuery('#integration_status').append('&nbsp;<img src=\"{$plugin_dir}/ok.gif\"> Payable');
               } else {
-                jQuery('#integration_status').append('&nbsp;<img src=\"{$plugin_dir}/no.gif\"> Not Payable (EXPLAIN)');
+                jQuery('#integration_status').append('&nbsp;<img src=\"{$plugin_dir}/no.gif\"> Not Payable (You did not provide SSN/TAX-ID for your account)');
               }
               
             } else {
@@ -157,7 +157,7 @@ $plugin_dir = get_bloginfo('wpurl').'/wp-content/plugins/'.dirname(plugin_basena
               jQuery('#siwp_email').attr('value', '".get_option('admin_email')."');
               jQuery('#siwp_title').attr('value', '".get_option('blogname')."');
               jQuery('#siwp_home').attr('value', '".get_bloginfo('wpurl')."');
-              jQuery('#siwp_id').attr('value', '".md5(get_bloginfo('wpurl'))."');
+              jQuery('#siwp_id').attr('value', '".md5(preg_replace('/www\./', '', get_bloginfo('wpurl')))."');
               jQuery('#account_form_container').fadeIn();
               
             }

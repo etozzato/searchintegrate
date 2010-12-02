@@ -190,6 +190,6 @@ function searchintegrate(){
           </script>";
   }
   if ($siwp_branding!=1)
-    echo "<script type=\"text/javascript\">document.getElementById('powered').style.display='none';</script>";
+    echo "<script type=\"text/javascript\">document.getElementById('siwp_powered').style.display='none';</script>";
 }
 ?>

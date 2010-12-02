@@ -10,11 +10,11 @@
   height:20px;
 }
 
-#siwp_header #results{
+#siwp_header #siwp_results{
   float:left;  
 }
 
-#siwp_header #powered{
+#siwp_header #siwp_powered{
   float:right;
 }
 

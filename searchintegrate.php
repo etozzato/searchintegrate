@@ -21,7 +21,7 @@ if (strrpos(get_bloginfo('wpurl'), 'localhost')){
 // ADMIN START //
 
 add_action('admin_menu', 'searchintegrate_admin');
-add_action('admin_menu', 'searchintegrate_css');
+add_action('admin_head', 'searchintegrate_css');
 
 function searchintegrate_admin(){
   add_options_page('Search Integrate', 'Search Integrate', 10, basename(__FILE__), 'searchintegrate_admin_panel');

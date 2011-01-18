@@ -48,20 +48,19 @@ function searchintegrate_admin_panel(){
         <div id="status">
           <div id="version">
             <div class="indicate">
-              <div class="light"><img src="<?php echo $plugin_dir; ?>/images/no.png" width="13" height="13" id="installed_version_img" /></div>
+              <div class="light">
+				<img src="<?php echo $plugin_dir; ?>/images/no.png" width="13" height="13" id="installed_version_img" /></div>
               <span id="installed_version"> -- </span>
             </div>
             <!-- indicate -->
           </div><!-- version -->
 
           <div class="siwp-clear"><br /></div>
-          <div id="integration_status">
             <div class="indicate">
-              <div class="light"><img src="<?php echo $plugin_dir; ?>/images/no.png" width="13" height="13" /></div>
-              <strong>Account Status: not complete.</strong> Please complete
-              the signup process below (required for payment).
+              <div class="light">
+				<img src="<?php echo $plugin_dir; ?>/images/no.png" width="13" height="13" id="integration_status_img" /></div>
+              <span id="integration_status"> -- </span>
             </div><!-- indicate -->
-          </div><!-- activation -->
         </div><!-- status -->
         <div id="details">
           <span class="siwp-subhead">your unique Integration ID</span>
@@ -144,7 +143,7 @@ rrrr
         <!-- siwp -->
 
       <?
-      $signup = file_get_contents(dirname(__FILE__)."/signup.html");
+      $signup = file_get_contents(dirname(__FILE__)."/signup_mini.html");
 
       echo "<script type=\"text/javascript\" src=\"".WPSI."/ping.js\"></script>";
 
@@ -170,26 +169,21 @@ rrrr
         }
 
         if(wp_is_active == true){
-
-          jQuery('#integration_status').html('<img src=\"{$plugin_dir}/images/yes.png\"> Active');
-
           if(wp_is_payable == true){
-            jQuery('#integration_status').append('&nbsp;<img src=\"{$plugin_dir}/images/yes.png\"> Payable');
+	        jQuery('#integration_status_img').attr('src', '{$plugin_dir}/images/yes.png');
+	        jQuery('#integration_status').html('Account Active - Payments Enabled');
           } else {
-            jQuery('#integration_status').append('&nbsp;<img src=\"{$plugin_dir}/images/no.png\"> Not Payable (EXPLAIN)');
+	        jQuery('#integration_status').html('Account Active Payments NOT Enabled');
           }
 
         } else {
 
           jQuery('#signup_content').html('{$signup}');
-          jQuery('#integration_status').prepend('<img src=\"{$plugin_dir}/images/no.png\"> Not Created');
-          jQuery('#account_form').attr('action', '".MYSI."/wp_account');
-          jQuery('#siwp_email').attr('value', '".get_option('admin_email')."');
-          jQuery('#siwp_title').attr('value', '".get_option('blogname')."');
+	      jQuery('#integration_status').html('Account NOT Created');
+          jQuery('#account_form').attr('action', '".MYSI."/wp/add');
           jQuery('#siwp_home').attr('value', '".get_bloginfo('wpurl')."');
           jQuery('#siwp_id').attr('value', '".md5(get_bloginfo('wpurl'))."');
           jQuery('#account_form_container').fadeIn();
-
         }
       } else {
         jQuery('#integration_status').html('Oops! Search Integrate is over-capacity. Thanks for noticing - we\'ll have everything back to normal soon.')
@@ -220,6 +214,6 @@ rrrr
           </script>";
         }
         if ($siwp_branding!=1)
-          echo "<script type=\"text/javascript\">document.getElementById('powered').style.display='none';</script>";
+          echo "<script type=\"text/javascript\">document.getElementById('siwp_powered').style.display='none';</script>";
       }
-      ?>
+?>

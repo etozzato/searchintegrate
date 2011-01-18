@@ -63,8 +63,11 @@ function searchintegrate_admin_panel(){
             </div><!-- indicate -->
         </div><!-- status -->
         <div id="details">
+	
           <span class="siwp-subhead">your unique Integration ID</span>
-          <?php echo md5(get_bloginfo('wpurl')); ?>
+		  <?php preg_match('/(?:https:\/\/)?(?:http:\/\/)?(?:www\.)?([0-9\w\.\-\_]+)/i', get_bloginfo('wpurl'), $matches); ?>
+		  <?php $wpurl = md5($matches[1]); ?>
+          <?php echo $wpurl; ?>
           <div class="siwp-clear"><br /></div>
           <span class="siwp-subhead">Blog installation location:</span>
           <?php form_option('home'); ?>
@@ -182,7 +185,7 @@ rrrr
 	      jQuery('#integration_status').html('Account NOT Created');
           jQuery('#account_form').attr('action', '".MYSI."/wp/add');
           jQuery('#siwp_home').attr('value', '".get_bloginfo('wpurl')."');
-          jQuery('#siwp_id').attr('value', '".md5(get_bloginfo('wpurl'))."');
+          jQuery('#siwp_id').attr('value', '".$wpurl."');
           jQuery('#account_form_container').fadeIn();
         }
       } else {

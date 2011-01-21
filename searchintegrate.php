@@ -128,7 +128,7 @@ function searchintegrate_admin_panel(){
           <div class="siwp-section" id="signup">
             <div class="sect-header"><div class="text">Create search integrate account</div></div>
             <div class="container" id="signup_content">
-rrrr
+              <a href='http://my.searchintegrate.com'>Click Here</a>
             </div>
 
           </div> 

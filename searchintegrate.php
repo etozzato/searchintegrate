@@ -130,7 +130,6 @@ function searchintegrate_admin_panel(){
             <div class="container" id="signup_content">
               <a href='http://my.searchintegrate.com'>Click Here</a>
             </div>
-
           </div> 
           <p>
           <!-- section - options -->
@@ -172,6 +171,7 @@ function searchintegrate_admin_panel(){
         }
 
         if(wp_is_active == true){
+          jQuery('#signup').fadeOut();
           if(wp_is_payable == true){
 	        jQuery('#integration_status_img').attr('src', '{$plugin_dir}/images/yes.png');
 	        jQuery('#integration_status').html('Account Active - Payments Enabled');

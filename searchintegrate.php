@@ -49,7 +49,7 @@ function searchintegrate_admin_panel(){
           <div id="version">
             <div class="indicate">
               <div class="light">
-				<img src="<?php echo $plugin_dir; ?>/images/no.png" width="13" height="13" id="installed_version_img" /></div>
+        <img src="<?php echo $plugin_dir; ?>/images/no.png" width="13" height="13" id="installed_version_img" /></div>
               <span id="installed_version"> -- </span>
             </div>
             <!-- indicate -->
@@ -58,15 +58,15 @@ function searchintegrate_admin_panel(){
           <div class="siwp-clear"><br /></div>
             <div class="indicate">
               <div class="light">
-				<img src="<?php echo $plugin_dir; ?>/images/no.png" width="13" height="13" id="integration_status_img" /></div>
+        <img src="<?php echo $plugin_dir; ?>/images/no.png" width="13" height="13" id="integration_status_img" /></div>
               <span id="integration_status"> -- </span>
             </div><!-- indicate -->
         </div><!-- status -->
         <div id="details">
-	
+  
           <span class="siwp-subhead">your unique Integration ID</span>
-		  <?php preg_match('/(?:https:\/\/)?(?:http:\/\/)?(?:www\.)?([0-9\w\.\-\_]+)/i', get_bloginfo('wpurl'), $matches); ?>
-		  <?php $wpurl = md5($matches[1]); ?>
+      <?php preg_match('/(?:https:\/\/)?(?:http:\/\/)?(?:www\.)?([0-9\w\.\-\_]+)/i', get_bloginfo('wpurl'), $matches); ?>
+      <?php $wpurl = md5($matches[1]); ?>
           <?php echo $wpurl; ?>
           <div class="siwp-clear"><br /></div>
           <span class="siwp-subhead">Blog installation location:</span>
@@ -173,16 +173,16 @@ function searchintegrate_admin_panel(){
         if(wp_is_active == true){
           jQuery('#signup').fadeOut();
           if(wp_is_payable == true){
-	        jQuery('#integration_status_img').attr('src', '{$plugin_dir}/images/yes.png');
-	        jQuery('#integration_status').html('Account Active - Payments Enabled');
+          jQuery('#integration_status_img').attr('src', '{$plugin_dir}/images/yes.png');
+          jQuery('#integration_status').html('Account Active - Payments Enabled');
           } else {
-	        jQuery('#integration_status').html('Account Active Payments NOT Enabled');
+          jQuery('#integration_status').html('Account Active, <a href=\'".MYSI."\' target=\'_new\'>Payments NOT Enabled</a>');
           }
 
         } else {
 
           jQuery('#signup_content').html('{$signup}');
-	      jQuery('#integration_status').html('Account NOT Created');
+          jQuery('#integration_status').html('Account NOT Created');
           jQuery('#account_form').attr('action', '".MYSI."/wp/add');
           jQuery('#siwp_home').attr('value', '".get_bloginfo('wpurl')."');
           jQuery('#siwp_id').attr('value', '".$wpurl."');
